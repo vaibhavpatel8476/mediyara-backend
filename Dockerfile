@@ -12,6 +12,9 @@ RUN docker-php-ext-install pdo pdo_mysql zip
 # Enable Apache rewrite
 RUN a2enmod rewrite
 
+# Allow .htaccess overrides (IMPORTANT)
+RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
 # Set Laravel public folder as root
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
